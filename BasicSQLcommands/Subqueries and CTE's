@@ -1,0 +1,17 @@
+SELECT *
+FROM ( -- this is where the subquery starts
+    SELECT *
+    FROM job_postings_fact
+    WHERE EXTRACT (MONTH FROM job_posted_date) = 1
+    ) AS january_jobs;
+
+    -- Can do the same thing with CTE's (common table expression)
+    WITH january_jobs AS (
+        SELECT *
+        FROM job_postings_fact
+        WHERE EXTRACT(MONTH FROM job_posted_date) = 1
+    ) 
+-- CTE Ends here, need to have parens enclosing query under the with statement
+    SELECT *
+    FROM january_jobs;
+    -- Kind of makes more sense to me, you make the table first then pull it

@@ -1,0 +1,15 @@
+SELECT 
+    COUNT(job_id) AS number_of_jobs,
+    CASE -- Case end operates as an if statement, can stack as many whens as needed
+        WHEN salary_year_avg < 75000 THEN 'LOW'
+        WHEN salary_year_avg BETWEEN 75000 AND 100000 THEN 'STANDARD'
+        ELSE 'HIGH'
+    END AS salary_category
+FROM 
+    job_postings_fact
+WHERE 
+    job_title_short = 'Data Analyst'
+GROUP BY
+    salary_category
+ORDER BY 
+    salary_category

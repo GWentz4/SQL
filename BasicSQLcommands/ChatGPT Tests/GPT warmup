@@ -1,0 +1,56 @@
+SELECT 
+    customer_id,
+    first_name,
+    last_name
+FROM customers
+WHERE
+city = 'Chicago'
+
+
+SELECT
+    order_id,
+    order_date,
+    first_name,
+    last_name
+FROM orders
+JOIN orders ON orders.customer_id = customers.customer_id
+
+SELECT
+    customer_id,
+    COUNT(order_count),
+    SUM(total_spent)
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id
+GROUP BY 
+    customer_id
+
+SELECT
+    customer_id,
+    COUNT(order_id) AS order_count,
+    SUM(total_amount) AS total_spent
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id
+GROUP BY 
+    customer_id
+HAVING COUNT(order_count) > 3 AND SUM(total_amount) > 500
+
+
+SELECT
+    order_id,
+    order_date,
+    total_amount
+FROM orders
+WHERE
+    EXTRACT(YEAR FROM order_date) = 2024
+    AND total_amount > 100
+
+SELECT
+   customer_id,
+   first_name,
+   last_name,
+   order_id,
+   total_amount
+FROM orders
+INNER JOIN customers ON orders.customer_id = customers.customer_id
+WHERE
+    total_amount > 150

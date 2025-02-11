@@ -1,0 +1,73 @@
+SELECT 
+    first_name,
+    last_name,
+    city
+FROM customers
+WHERE
+    city = 'New York'
+ORDER BY 
+    last_name ASC;
+
+    SELECT 
+    customers.*first_name,
+    customers.last_name,
+    orders.total_amount
+FROM customers
+JOIN orders ON customers.customer_id = orders.customer_id
+WHERE
+    EXTRACT(YEAR FROM order.order_date) = 2024;
+
+
+SELECT
+    orders.order_id,
+    customer_id,
+    customers.first_name,
+    customers.last_name
+FROM customers
+JOIN orders ON orders.customer_id = customers.customer_id
+WHERE
+    EXTRACT(YEAR FROM orders.order_date) = 2023
+
+SELECT
+orders.order_id,
+orders.customer_id,
+orders.order_date,
+orders.total_amount
+customers.city
+FROM orders
+JOIN customers ON order.customer_id = customer.customer_id
+WHERE 
+    city = 'Los Angeles'
+
+
+    SELECT
+orders.order_id,
+orders.order_date,
+customers.first_name,
+customers.last_name
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id
+WHERE 
+    total_amount > 200
+
+    SELECT
+orders.order_id,
+orders.total_amount,
+customers.first_name,
+customers.last_name
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id
+WHERE 
+    EXTRACT(YEAR FROM orders.order_date) = 2024
+    EXTRACT(MONTH FROM orders.order_date) = 1
+
+    SELECT
+orders.order_id,
+orders.total_amount,
+customers.first_name,
+customers.last_name
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id
+WHERE 
+    customers.last_name = 'Smith' AND
+    orders.total_amount > 150
